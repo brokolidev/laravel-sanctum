@@ -59,3 +59,11 @@ Route::get('/custom-user/create-token', function () {
 Route::get('/custom-user/test', function () {
     return strlen("qdVDlmINSG6LVNfq1sHmXdmI6egqWLKVZq8t7DMrqQfF4Yq9KknhvRgYYmVYVgpd7ros2oNX3mD1xVYg");
 });
+
+Route::get('/custom-user/login', function (Request $req) {
+    $id = "test";
+    $password = "test";
+    $hashedPassword = DB::select(DB::raw("SELECT password('$password')"));
+
+    return $hashedPassword;
+});

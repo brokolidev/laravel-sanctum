@@ -1,5 +1,6 @@
 <?php
 
+use App\Member;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,4 +37,25 @@ Route::middleware("auth")->group(function () {
 
         return $token->plainTextToken;
     });
+});
+
+Route::get('/custom-user', function () {
+    $user = Member::find('72');
+    return $user;
+});
+
+Route::get('/custom-user/create-token', function () {
+    $memberId = 72;
+    $user = Member::find($memberId);
+
+    // 신규 토큰을 발급 받기 전에 모든 토큰을 삭제
+    $user->tokens()->delete();
+    $token = $user->createToken('android-token')->plainTextToken;
+    $user->api_token = $token;
+    $user->save();
+    return $token;
+});
+
+Route::get('/custom-user/test', function () {
+    return strlen("qdVDlmINSG6LVNfq1sHmXdmI6egqWLKVZq8t7DMrqQfF4Yq9KknhvRgYYmVYVgpd7ros2oNX3mD1xVYg");
 });

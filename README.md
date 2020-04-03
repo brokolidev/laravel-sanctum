@@ -1,4 +1,4 @@
-<p align="center">Laravel Sanctom Demo</p>
+# Laravel Sanctom Demo
 
 ## About Laravel Sanctom
 
